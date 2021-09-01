@@ -1,3 +1,5 @@
+const { default: fetch } = require("node-fetch");
+
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
 const playIcon = playBtn.querySelector("i");
@@ -111,11 +113,19 @@ const handleKeydown = (event) => {
     }
 }
 
+const handleEnded = () => {
+    const {id} = videoContainer.dataset;
+    fetch(`/api/videos/${id}/view`, {
+        method: "POST",
+    })
+}
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("ended", handleEnded);
 timeLine.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
