@@ -1,10 +1,18 @@
 doctype html 
+include mixins/message
+
 html(lang="ko")
     head
         title  #{pageTitle} | #{siteName}
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
         link(rel="stylesheet", href="/assets/css/styles.css")
     body
+        if messages.error
+            +message("error", messages.error)
+        if messages.info 
+            +message("info", messages.ifno)
+        if messages.success
+            +message("success", messages.success)        
         include partials/header
         main 
             block content

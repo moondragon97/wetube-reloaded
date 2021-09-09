@@ -107,6 +107,7 @@ export const finishGithubLogin = async (req, res) => {
             (email) => email.primary === true && email.verified === true
         );
         if(!emailObj){
+            req.flash("error", "email에 대한 정보를 찾지 못했습니다.");
             return res.redirect("/login");
         }
         let user = await User.findOne({email: emailObj.email});
