@@ -108,7 +108,7 @@ const handleMouseLeave = () => {
 };
 
 const handleKeydown = (event) => {
-    if(event.code === "Space"){
+    if(event.code === "Space" && document.activeElement.tagName!="TEXTAREA"){
         handlePlayClick();
     }
 }
@@ -117,7 +117,7 @@ const handleEnded = () => {
     const {id} = videoContainer.dataset;
     fetch(`/api/videos/${id}/view`, {
         method: "POST",
-    })
+    });
 }
 
 playBtn.addEventListener("click", handlePlayClick);

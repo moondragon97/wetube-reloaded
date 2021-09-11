@@ -16,13 +16,14 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie:{
-        maxAge: 1000000,
+        maxAge: 20000000,
     },
     store: MongoStore.create({mongoUrl: process.env.DB_URL}),    // 세션 및 로그인 정보를 서버가 아닌 데이터베이스에 저장
 })
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
     res.header("Cross-Origin-Embedder-Policy", "require-corp");
     res.header("Cross-Origin-Opener-Policy", "same-origin");
     next();
-  });
+});
 app.use(flash());
 app.use(localsMiddleware);
 app.use("/", rootRouter);

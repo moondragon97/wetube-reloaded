@@ -29,12 +29,23 @@ block content
         a(href=`${video.id}/edit`) Edit Video &rarr;
         br
         a(href=`${video.id}/delete`) Delete Video &rarr;
-    
+    if loggedIn
+        div.video__comments
+            form.video__comment-form#commentForm
+                textarea(cols="30", rows="10", placeholder="Write a comment...")
+                button Add Comment
     div.video__comments
-        form.video__comment-form#commentForm
-            textarea(cols="30", rows="10", placeholder="Write a comment...")
-            button Add Comment
+        ul
+            each comment in video.comments.reverse()
+                li.video__comment(data-id=comment._id)
+                    i.fas.fa-comment
+                    span #{comment.text}
+                    if video.owner._id == loggedInUser._id
+                        div.comment__change
+                            span#edit.comment__edit 🖌
+                            span#delete.comment__delete ❌
 
 block scripts
     script(src="/assets/js/videoPlayer.js")
-    script(src="/assets/js/commentSection.js")
+    if loggedIn
+        script(src="/assets/js/commentSection.js")
