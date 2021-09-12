@@ -21,7 +21,6 @@ video.volume = volumeValue;
 
 
 const handlePlayClick = (e) => {
-    console.log("click");
     if(video.paused){
         video.play();
     } 
@@ -32,9 +31,6 @@ const handlePlayClick = (e) => {
     playIcon.className = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
-video.onkeydown = function() {
-    console.log(event.keyCode);
-}
 
 const handleMute = (e) => {
     if(video.muted){

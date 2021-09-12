@@ -54,7 +54,6 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
     const {user: {_id}} = req.session;
     const {video, thumb} = req.files;
-    console.log(req.files)
     const {title, description, hashtags} = req.body;
     try{
         const newVideo = await Video.create({
@@ -111,7 +110,6 @@ export const search = async(req,res) => {
 export const registerView = async (req, res) => {
     const {id} = req.params;
     const video = await Video.findById(id);
-    console.log(id);
     if(!video){
         return res.sendStatus(404);
     }
@@ -165,7 +163,6 @@ export const editComment = async (req, res) => {
         params: {id},
         body: {text},
     }=req;
-    console.log(text);
     const comment = await Comment.findById(id)
     if(user._id != comment.owner){
         return res.sendStatus(404);

@@ -118,7 +118,6 @@ const handleEdit = async (event) => {
 const handleDelete = async (event) => {
     event.preventDefault();
     const comment = event.path[2];
-    console.log(comment);
     const commentId = comment.dataset.id;
     const response = await fetch(`/api/comment/${commentId}/delete`,{
         method: "DELETE",
