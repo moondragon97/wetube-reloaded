@@ -28,11 +28,10 @@ app.use(session({
     store: MongoStore.create({mongoUrl: process.env.DB_URL}),    // 세션 및 로그인 정보를 서버가 아닌 데이터베이스에 저장
 })
 );
-
-app.use((req, res, next) => {
-    res.header("Cross-Origin-Embedder-Policy", "require-corp");
-    res.header("Cross-Origin-Opener-Policy", "same-origin");
-    next();
+app.use((req, res, next)=> {
+    res.removeHeader("Cross-Origin-Resource-Policy")
+    res.removeHeader("Cross-Origin-Embedder-Policy")
+    next()
 });
 app.use(flash());
 app.use(localsMiddleware);
